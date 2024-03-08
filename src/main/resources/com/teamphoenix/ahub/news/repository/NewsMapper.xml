@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teamphoenix.ahub.news.query.repository.NewsMapper">
+
+    <resultMap id="searchNewsByCondition" type="com.teamphoenix.ahub.news.query.dto.NewsDTO">
+        <id property="newsId" column="news_id"/>
+        <result property="newsTitle" column="news_title"/>
+        <result property="newsWritedate" column="news_writedate"/>
+    </resultMap>
+    <resultMap id="getOrdinaryView" type="com.teamphoenix.ahub.news.query.dto.NewsDTO" extends="searchNewsByCondition">
+        <result property="memberCode" column="member_code"/>
+        <result property="newsContent" column="news_content"/>
+    </resultMap>
+
+    <select id="getNewsPost" parameterType="_int" resultMap="getOrdinaryView">
+        SELECT
+        F.news_id
+        , F.news_title
+        , F.news_content
+        , F.news_writedate
+        , F.member_code
+        FROM news F
+        WHERE F.news_id = #{newsId} ;
+    </select>
+
+    <select id="selectPostsByCondition" parameterType="com.teamphoenix.ahub.news.query.dto.NewsDTO" resultMap="searchNewsByCondition">
+        SELECT
+        F.news_id
+        , F.news_title
+        , F.news_writedate
+        FROM news F
+        <where>
+            <if test="newsTitle neq null and newsContent eq null">
+                F.news_title LIKE CONCAT ('%', #{newsTitle}, '%')
+            </if>
+            <if test="newsContent neq null and newsTitle eq null">
+                F.news_content LIKE CONCAT('%', #{newsContent}, '%')
+            </if>
+            <if test="newsTitle neq null and newsContent neq null">
+                F.news_title LIKE CONCAT('%', #{newsTitle}, '%')
+                AND F.news_content LIKE CONCAT('%', #{newsContent}, '%')
+            </if>
+        </where>
+    </select>
+</mapper>

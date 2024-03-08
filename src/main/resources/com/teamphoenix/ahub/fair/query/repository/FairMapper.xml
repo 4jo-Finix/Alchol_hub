@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teamphoenix.ahub.fair.query.repository.FairMapper">
+
+    <resultMap id="selectFairList" type="com.teamphoenix.ahub.fair.query.dto.FairDTO">
+        <id property="fairId" column="fair_id"/>
+        <result property="fairTitle" column="fair_title"/>
+        <result property="fairWritedate" column="fair_writedate"/>
+    </resultMap>
+    <resultMap id="getOrdinaryView" type="com.teamphoenix.ahub.fair.query.dto.FairDTO" extends="selectFairList">
+        <result property="fairContent" column="fair_content"/>
+        <result property="useAcceptance" column="use_acceptance"/>
+        <result property="memberCode" column="member_code"/>
+    </resultMap>
+
+    <select id="getFairPost" parameterType="_int" resultMap="getOrdinaryView">
+        SELECT
+        F.fair_id
+        , F.fair_title
+        , F.fair_content
+        , F.fair_writedate
+        , F.use_acceptance
+        , F.member_code
+        FROM fair F
+        WHERE F.fair_id = #{fairId} ;
+    </select>
+
+    <select id="selectPostsByCondition" parameterType="com.teamphoenix.ahub.fair.query.dto.FairDTO" resultMap="selectFairList">
+        SELECT
+        F.fair_id
+        , F.fair_title
+        , F.fair_writedate
+        FROM fair F
+        <where>
+            <if test="fairTitle neq null and fairContent eq null">
+                F.fair_title LIKE CONCAT ('%', #{fairTitle}, '%')
+            </if>
+            <if test="fairContent neq null and fairTitle eq null">
+                F.fair_content LIKE CONCAT('%', #{fairContent}, '%')
+            </if>
+            <if test="fairTitle neq null and fairContent neq null">
+                F.fair_title LIKE CONCAT('%', #{fairTitle}, '%')
+                AND F.fair_content LIKE CONCAT('%', #{fairContent}, '%')
+            </if>
+        </where>
+    </select>
+</mapper>

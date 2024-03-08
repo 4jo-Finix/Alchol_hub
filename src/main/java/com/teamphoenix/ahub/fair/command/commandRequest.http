@@ -1,0 +1,52 @@
+### POST new Fair Post
+POST localhost:10003/board/fairs/new
+Content-Type: application/json
+
+{
+  "fairTitle": "새롭게 등록된 페어 정보 게시글입니다!",
+  "fairContent": "새롭게 등록된 페어 게시글 내용 !"
+}
+
+
+### PUT Fair Post (title only)
+PUT localhost:10003/board/fairs/9
+Content-Type: application/json
+
+{
+  "fairId": 9,
+  "fairTitle": "수정된 페어 게시글 제목",
+  "fairContent": "새롭게 등록된 페어 게시글 내용 !",
+  "fairWritedate": "2024-03-04T00:12:34.500",
+  "useAcceptance": 1,
+  "memberCode": 1
+}
+
+### PUT Fair Post (content only)
+PUT localhost:10003/board/fairs/9
+Content-Type: application/json
+
+{
+  "fairId": 9,
+  "fairTitle": "새롭게 등록된 페어 정보 게시글입니다!",
+  "fairContent": "페어 정보 게시글의 내용을 수정하였습니다",
+  "fairWritedate": "2024-03-04T00:12:34.500",
+  "useAcceptance": 1,
+  "memberCode": 1
+}
+
+### PUT Fair Post (title & content)
+PUT localhost:10003/board/fairs/9
+Content-Type: application/json
+
+{
+  "fairId": 9,
+  "fairTitle": "수정된 페어 게시글 제목",
+  "fairContent": "페어 제목&내용 수정 테스트의 내용 입니다.",
+  "fairWritedate": "2024-03-04T00:12:34.500",
+  "useAcceptance": 1,
+  "memberCode": 1
+}
+
+### DELETE Fair Post
+DELETE  localhost:10003/board/fairs/9
+

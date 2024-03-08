@@ -1,0 +1,14 @@
+### GET Fair Post
+GET localhost:10003/board/fairs/1
+
+### GET Fair List (no condition)
+GET localhost:10003/board/fairs/lists
+
+### GET Fair List (title)
+GET localhost:10003/board/fairs/lists?st=2024
+
+### GET Fair List (content)
+GET localhost:10003/board/fairs/lists?sc=주류
+
+### GET Fair List (title&content)
+GET localhost:10003/board/fairs/lists?st=2024&sc=서울
