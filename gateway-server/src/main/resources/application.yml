@@ -31,11 +31,81 @@ spring:
             - Method=POST, PUT, DELETE
           filters:
             - RewritePath=/board/fairs/(?<segment>.*), /fairs/$\{segment}
-#            - AuthorizationFilter
+        #            - AuthorizationFilter
+
+        # Fair Service POST, PUT, DELETE
+        - id: fair-modify
+          uri: lb://FAIR-AND-NEWS-SERVICE
+          predicates:
+            - Path=/board/fairs/**
+            - Method=POST, PUT, DELETE
+          filters:
+            - RewritePath=/board/fairs/(?<segment>.*), /fairs/$\{segment}
+
+        # Reply Service GET(회원 별 작성한 댓글 조회)
+        - id: reply-get
+          uri: lb://REPLY-SERVER
+          predicates:
+            - Path=/reply/member/**
+            - Method=GET
+
+        # Reply Service GET(게시물 별 댓글 조회)
+        - id: reply-get
+          uri: lb://REPLY-SERVER
+          predicates:
+            - Path=/reply/board/replies/**
+            - Method=GET
+
+        # Reply Service GET(댓글 검색)
+        - id: reply-get
+          uri: lb://REPLY-SERVER
+          predicates:
+            - Path=/reply/board/search/**
+            - Method=GET
+
+        # Reply Service POST(댓글 등록)
+        - id: reply-post
+          uri: lb://REPLY-SERVER
+          predicates:
+            - Path=/reply/regist
+            - Method=POST
+
+        # Reply Service PUT(댓글 수정)
+        - id: reply-put
+          uri: lb://REPLY-SERVER
+          predicates:
+            - Path=/reply/modify/**
+            - Method=PUT
+
+        # Reply Service DELETE(댓글 삭제)
+        - id: reply-delete
+          uri: lb://REPLY-SERVER
+          predicates:
+            - Path=/reply/delete/**
+            - Method=DELETE
 
         # Member Service Feign Client 설정
         - id: member-service
-          uri: lb://member-service
+          uri: lb://MEMBER-SERVICE
+          predicates:
+            - Path=/member-service/**
+            - Method=POST, PUT, DELETE
+            #          filters:
+          filters:
+            - RewritePath=/member-service/(?<segment>.*), /$\{segment}
+
+        # Member Service GET
+        - id: member-search
+          uri: lb://MEMBER-SERVICE
+          predicates:
+            - Path=/member-service/**
+            - Method=GET
+          filters:
+            - RewritePath=/member-service/(?<segment>.*), /$\{segment}
+
+            # Member Service POST, PUT, DELETE
+        - id: member-modify
+          uri: lb://MEMBER-SERVICE
           predicates:
             - Path=/member-service/**
             - Method=POST, PUT, DELETE
