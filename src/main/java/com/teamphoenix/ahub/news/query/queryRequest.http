@@ -1,0 +1,14 @@
+### GET News Post
+GET localhost:10003/news/1
+
+### GET News List (no condition)
+GET localhost:10003/news/lists
+
+### GET News List (title)
+GET localhost:10003/news/lists?st=2
+
+### GET News List (content)
+GET localhost:10003/news/lists?sc=와인
+
+### GET News List (title&content)
+GET localhost:10003/news/lists?st=2&sc=와인
