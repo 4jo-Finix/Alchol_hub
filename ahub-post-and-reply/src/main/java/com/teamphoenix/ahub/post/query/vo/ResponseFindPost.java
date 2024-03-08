@@ -1,7 +1,7 @@
-package com.teamphoenix.ahub.postreply.query.vo;
+package com.teamphoenix.ahub.post.query.vo;
 
 
-import com.teamphoenix.ahub.postreply.query.dto.PostDTO;
+import com.teamphoenix.ahub.post.query.dto.PostDTO;
 
 public class ResponseFindPost {
 

@@ -1,4 +1,4 @@
-package com.teamphoenix.ahub.postreply;
+package com.teamphoenix.ahub.post;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

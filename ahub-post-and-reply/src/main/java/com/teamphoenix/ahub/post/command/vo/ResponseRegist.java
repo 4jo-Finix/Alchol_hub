@@ -1,6 +1,6 @@
-package com.teamphoenix.ahub.postreply.command.vo;
+package com.teamphoenix.ahub.post.command.vo;
 
-import com.teamphoenix.ahub.postreply.command.dto.PostDTO;
+import com.teamphoenix.ahub.post.command.dto.PostDTO;
 import lombok.*;
 
 @NoArgsConstructor

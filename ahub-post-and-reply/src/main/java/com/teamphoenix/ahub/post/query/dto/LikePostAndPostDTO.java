@@ -1,4 +1,4 @@
-package com.teamphoenix.ahub.postreply.query.dto;
+package com.teamphoenix.ahub.post.query.dto;
 
 import java.util.Date;
 import java.util.List;

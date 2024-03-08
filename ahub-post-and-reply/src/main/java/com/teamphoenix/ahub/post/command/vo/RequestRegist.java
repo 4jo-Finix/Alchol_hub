@@ -1,4 +1,4 @@
-package com.teamphoenix.ahub.postreply.command.vo;
+package com.teamphoenix.ahub.post.command.vo;
 
 import lombok.*;
 

@@ -1,4 +1,4 @@
-package com.teamphoenix.ahub.postreply.command.dto;
+package com.teamphoenix.ahub.post.command.dto;
 
 import lombok.*;
 

@@ -1,4 +1,4 @@
-package com.teamphoenix.ahub.postreply.query.vo;
+package com.teamphoenix.ahub.post.query.vo;
 
 import java.util.List;
 

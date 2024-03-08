@@ -1,4 +1,4 @@
-package com.teamphoenix.configuration;
+package com.teamphoenix.ahub.reply.query.configuration;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.spring.annotation.MapperScan;

@@ -1,4 +1,4 @@
-package com.teamphoenix.ahub.postreply.command.aggregate;//package com.teampheonix.postreply.command.entity;
+package com.teamphoenix.ahub.post.command.aggregate;//package com.teampheonix.postreply.command.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

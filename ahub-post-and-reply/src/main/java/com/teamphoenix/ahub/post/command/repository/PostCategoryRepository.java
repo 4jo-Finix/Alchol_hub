@@ -1,6 +1,6 @@
-package com.teamphoenix.ahub.postreply.command.repository;
+package com.teamphoenix.ahub.post.command.repository;
 
-import com.teamphoenix.ahub.postreply.command.aggregate.PostCategory;
+import com.teamphoenix.ahub.post.command.aggregate.PostCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
