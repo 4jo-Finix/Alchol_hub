@@ -1,8 +1,8 @@
-package com.teamphoenix.ahub.postreply.query.service;
+package com.teamphoenix.ahub.post.query.service;
 
-import com.teamphoenix.ahub.postreply.query.dto.LikePostAndPostDTO;
-import com.teamphoenix.ahub.postreply.query.dto.PostDTO;
-import com.teamphoenix.ahub.postreply.query.mapper.PostMapper;
+import com.teamphoenix.ahub.post.query.dto.LikePostAndPostDTO;
+import com.teamphoenix.ahub.post.query.dto.PostDTO;
+import com.teamphoenix.ahub.post.query.mapper.PostMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +30,7 @@ public class PostServiceImpl implements PostService {
         // postId 의 밸류가 넘어와서 getPostNum 에 저장됨
         PostDTO result = postMapper.getPost(postId);
 //        log.info("반환된 result 값 : {}", result);
+        System.out.println(result);
 
         return result;
     }
@@ -43,11 +44,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDTO> selectPostsByMemberCode(String inputMemberCode) {
-        int intMemberCode = Integer.valueOf(inputMemberCode);
-
-        Map<String, Integer> memberCode = new HashMap<>();
-        memberCode.put("memberCode", intMemberCode);
+    public List<PostDTO> selectPostsByMemberCode(int memberCode) {
 
         List<PostDTO> memberList = postMapper.selectPostsByMemberCode(memberCode);
 
@@ -55,13 +52,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<LikePostAndPostDTO> selectPostsByLikeId(String inputLikeId) {
-        int intLikeId = Integer.valueOf(inputLikeId);
-
-        Map<String, Integer> likeId = new HashMap<>();
-        likeId.put("likeId", intLikeId);
-
-        List<LikePostAndPostDTO> memberList2 = postMapper.selectPostsByLikeId(likeId);
+    public List<LikePostAndPostDTO> selectPostsByLikeId(int memberCode) {
+        List<LikePostAndPostDTO> memberList2 = postMapper.selectPostsByLikeId(memberCode);
 
         return memberList2;
     }
@@ -72,7 +64,7 @@ public class PostServiceImpl implements PostService {
 
         Map<String, String> map1 = new HashMap<>();
         map1.put("postDate", postDate1);
-        map1.put("likeAmount", "5");
+
 
         List<PostDTO> postDateList = postMapper.selectDayLikePost(map1);
 
@@ -85,7 +77,6 @@ public class PostServiceImpl implements PostService {
 
         Map<String, String> map2 = new HashMap<>();
         map2.put("postDate", postDate2);
-        map2.put("likeAmount", "10");
 
         List<PostDTO> postDateList = postMapper.selectMonthLikePost(map2);
 

@@ -1,11 +1,9 @@
-package com.teamphoenix.ahub.postreply.command.aggregate;//package com.teampheonix.postreply.command.entity;
+package com.teamphoenix.ahub.post.command.aggregate;//package com.teampheonix.postreply.command.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name="post")
@@ -28,7 +26,7 @@ public class Post {
     private String postContent;
 
     @Column(name="post_date")
-    private LocalDateTime postDate;
+    private String postDate;
 
     @Column(name="category_id")
     private int categoryId;
@@ -46,7 +44,7 @@ public class Post {
     private int memberCode;
 
     @Column(name="post_modify_date")
-    private LocalDateTime postModifyDate;
+    private String postModifyDate;
 
 
 }

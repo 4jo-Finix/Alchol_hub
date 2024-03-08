@@ -1,4 +1,4 @@
-package com.teamphoenix.ahub.postreply.query.dto;
+package com.teamphoenix.ahub.post.query.dto;
 
 import java.time.LocalDateTime;
 
@@ -8,11 +8,11 @@ public class PostDTO {
     private int likeAmount;
     private int reportedAcceptance;
     private int memberCode;
-    private LocalDateTime postModifyDate;
+    private String postModifyDate;
     private int postId;
     private String postTitle;
     private String postContent;
-    private LocalDateTime postDate;
+    private String postDate;
     private int categoryId;
 
     public PostDTO() {
@@ -23,7 +23,7 @@ public class PostDTO {
         this.postContent = postContent;
     }
 
-    public PostDTO(int postId, String postTitle, String postContent, LocalDateTime postDate, int categoryId, int memberCode) {
+    public PostDTO(int postId, String postTitle, String postContent, String postDate, int categoryId, int memberCode) {
         this.postId = postId;
         this.postTitle = postTitle;
         this.postContent = postContent;
@@ -32,7 +32,7 @@ public class PostDTO {
         this.memberCode = memberCode;
     }
 
-    public PostDTO(int useAcceptance, int likeAmount, int reportedAcceptance, int memberCode, LocalDateTime postModifyDate, int postId, String postTitle, String postContent, LocalDateTime postDate, int categoryId) {
+    public PostDTO(int useAcceptance, int likeAmount, int reportedAcceptance, int memberCode, String postModifyDate, int postId, String postTitle, String postContent, String postDate, int categoryId) {
         this.useAcceptance = useAcceptance;
         this.likeAmount = likeAmount;
         this.reportedAcceptance = reportedAcceptance;
@@ -77,11 +77,11 @@ public class PostDTO {
         this.memberCode = memberCode;
     }
 
-    public LocalDateTime getPostModifyDate() {
+    public String getPostModifyDate() {
         return postModifyDate;
     }
 
-    public void setPostModifyDate(LocalDateTime postModifyDate) {
+    public void setPostModifyDate(String postModifyDate) {
         this.postModifyDate = postModifyDate;
     }
 
@@ -109,11 +109,11 @@ public class PostDTO {
         this.postContent = postContent;
     }
 
-    public LocalDateTime getPostDate() {
+    public String getPostDate() {
         return postDate;
     }
 
-    public void setPostDate(LocalDateTime postDate) {
+    public void setPostDate(String postDate) {
         this.postDate = postDate;
     }
 

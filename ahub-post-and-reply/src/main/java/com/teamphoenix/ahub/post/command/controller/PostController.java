@@ -1,16 +1,18 @@
-package com.teamphoenix.ahub.postreply.command.controller;
+package com.teamphoenix.ahub.post.command.controller;
 
-import com.teamphoenix.ahub.postreply.command.dto.PostDTO;
-import com.teamphoenix.ahub.postreply.command.service.PostService;
-import com.teamphoenix.ahub.postreply.command.vo.RequestRegist;
-import com.teamphoenix.ahub.postreply.command.vo.ResponseRegist;
+import com.teamphoenix.ahub.post.command.dto.PostDTO;
+import com.teamphoenix.ahub.post.command.service.PostService;
+import com.teamphoenix.ahub.post.command.vo.RequestRegist;
+import com.teamphoenix.ahub.post.command.vo.ResponseRegist;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @RestController(value = "postCommandController")
 @RequestMapping("/post")
@@ -29,9 +31,18 @@ public class PostController {
     public ResponseEntity<ResponseRegist> addNewPost(@RequestBody RequestRegist postInfo) {
 
         PostDTO newPost = modelMapper.map(postInfo, PostDTO.class);
-        newPost.setPostDate(LocalDateTime.now());
-        newPost.setPostModifyDate(LocalDateTime.now());
+//        newPost.setPostDate(LocalDateTime.now());
+//        newPost.setPostModifyDate(LocalDateTime.now());
+
+        LocalDate localDate = LocalDate.now();
+        String dateFormat = localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        newPost.setPostDate(dateFormat);
+        newPost.setPostModifyDate(dateFormat);
+        newPost.setCategoryId(1);
+        newPost.setLikeAmount(0);
         newPost.setUseAcceptance(1);
+        newPost.setReportedAcceptance(0);
         newPost.setMemberCode(1);
 
         postService.createPost(newPost);
@@ -45,8 +56,8 @@ public class PostController {
     }
 
 
-    @DeleteMapping("/{postId}")
-    public ResponseEntity<ResponseRegist> removePost(@PathVariable("postId") int postId) {
+    @DeleteMapping("/delete/{postId}")
+    public ResponseEntity<ResponseRegist> removePost(@PathVariable int postId) {
         postService.removePost(postId);
 
         ResponseRegist responseRegist = new ResponseRegist();
@@ -54,6 +65,15 @@ public class PostController {
 
         return ResponseEntity
                 .status(HttpStatus.OK).body(responseRegist);
+    }
+
+    @PutMapping("/modify/{postId}")
+    public ResponseEntity<PostDTO> modifyPost(@RequestBody PostDTO modifyInfo, @PathVariable int postId){
+
+        PostDTO postDTO = postService.modifyPost(modifyInfo, postId);
+
+        return ResponseEntity
+                .status(HttpStatus.OK).body(postDTO);
     }
 
 }

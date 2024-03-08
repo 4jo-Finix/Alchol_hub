@@ -1,7 +1,6 @@
-package com.teamphoenix.ahub.postreply.command.dto;
+package com.teamphoenix.ahub.post.command.dto;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import lombok.*;
@@ -16,13 +15,13 @@ public class PostDTO {
     private int postId;
     private String postTitle;
     private String postContent;
-    private LocalDateTime postDate;
+    private String postDate;
     private int categoryId;
     private int useAcceptance;
     private int likeAmount;
     private int reportedAcceptance;
     private int memberCode;
-    private LocalDateTime postModifyDate;
+    private String postModifyDate;
     private List<PostCategoryDTO> postCategories;
 
 }

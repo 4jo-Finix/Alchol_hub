@@ -1,7 +1,7 @@
-package com.teamphoenix.ahub.postreply.query.mapper;
+package com.teamphoenix.ahub.post.query.mapper;
 
-import com.teamphoenix.ahub.postreply.query.dto.LikePostAndPostDTO;
-import com.teamphoenix.ahub.postreply.query.dto.PostDTO;
+import com.teamphoenix.ahub.post.query.dto.LikePostAndPostDTO;
+import com.teamphoenix.ahub.post.query.dto.PostDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.Map;
 @Mapper
 public interface PostMapper {
 
-    List<PostDTO> selectPostsByMemberCode(Map<String, Integer> memberCode);
+    List<PostDTO> selectPostsByMemberCode(int memberCode);
 
-    List<LikePostAndPostDTO> selectPostsByLikeId(Map<String, Integer> likeId);
+    List<LikePostAndPostDTO> selectPostsByLikeId(int memberCode);
 
     List<PostDTO> selectDayLikePost(Map<String, String> map1);
 
