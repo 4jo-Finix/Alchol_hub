@@ -1,0 +1,26 @@
+server:
+  port: 9999
+
+  # db config :
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/ahubdb
+    username: ahub4
+    password: ahub4
+
+    jpa:
+      generate-ddl: false
+      show-sql: true
+      database: mysql
+      properties:
+        hibernate:
+          '[format_sql]': true
+
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://localhost:10000/eureka
+

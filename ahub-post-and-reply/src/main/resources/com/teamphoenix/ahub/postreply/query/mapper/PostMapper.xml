@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teamphoenix.ahub.postreply.query.mapper.PostMapper">
+
+    <resultMap id="postResultMap" type="com.teamphoenix.ahub.postreply.query.dto.PostDTO">
+        <id property="postId" column="post_id"/>
+        <result property="postTitle" column="post_title"/>
+        <result property="postContent" column="post_content"/>
+        <result property="postDate" column="post_date"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="likeAmount" column="like_amount"/>
+        <result property="memberCode" column="member_code"/>
+        <result property="postModifyDate" column="post_modify_date"/>
+    </resultMap>
+    <select id="selectPostsByMemberCode" resultMap="postResultMap" parameterType="int">
+        SELECT
+        post_id,
+        post_title,
+        post_content,
+        post_date,
+        category_id,
+        like_amount,
+        member_code,
+        post_modify_date
+        FROM post
+        WHERE member_code = #{memberCode}
+    </select>
+
+    <resultMap id="likePostAndPostResultMap" type="com.teamphoenix.ahub.postreply.query.dto.LikePostAndPostDTO">
+        <id property="likeId" column="like_id"/>
+        <result property="likeDate" column="like_date"/>
+        <result property="likeCancelDate" column="like_cancel_date"/>
+        <result property="likeState" column="like_state"/>
+        <result property="postId" column="post_id"/>
+        <collection property="posts" ofType="com.teamphoenix.ahub.postreply.query.dto.PostDTO">
+            <id property="postId" column="post_id"/>
+            <result property="postTitle" column="post_title"/>
+            <result property="postContent" column="post_content"/>
+            <result property="postDate" column="post_date"/>
+            <result property="categoryId" column="category_id"/>
+            <result property="likeAmount" column="like_amount"/>
+            <result property="memberCode" column="member_code"/>
+            <result property="postModifyDate" column="post_modify_date"/>
+        </collection>
+    </resultMap>
+    <select id="selectPostsByLikeId" resultMap="likePostAndPostResultMap" parameterType="int">
+        SELECT
+        a.like_id,
+        a.like_date,
+        a.like_cancel_date,
+        a.like_state,
+        a.post_id,
+        b.post_title,
+        b.post_content,
+        b.post_date,
+        b.category_id,
+        b.like_amount,
+        b.member_code,
+        b.post_modify_date
+        FROM liked_post a
+        JOIN post b ON a.post_id = b.post_id
+        WHERE a.like_id = #{likeId}
+    </select>
+
+    <resultMap id="dayLikePostResultMap" type="com.teamphoenix.ahub.postreply.query.dto.PostDTO">
+        <id property="postId" column="post_id"/>
+        <result property="postTitle" column="post_title"/>
+        <result property="postContent" column="post_content"/>
+        <result property="postDate" column="post_date"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="likeAmount" column="like_amount"/>
+        <result property="memberCode" column="member_code"/>
+        <result property="postModifyDate" column="post_modify_date"/>
+    </resultMap>
+    <select id="selectDayLikePost" resultMap="dayLikePostResultMap" parameterType="hashmap">
+        SELECT
+        post_id,
+        post_title,
+        post_content,
+        post_date,
+        category_id,
+        like_amount,
+        member_code,
+        post_modify_date
+        FROM post
+        WHERE DATEDIFF(post_date, #{postDate}) = 0
+        AND like_amount >= #{likeAmount}
+    </select>
+
+    <resultMap id="monthLikePostResultMap" type="com.teamphoenix.ahub.postreply.query.dto.PostDTO">
+        <id property="postId" column="post_id"/>
+        <result property="postTitle" column="post_title"/>
+        <result property="postContent" column="post_content"/>
+        <result property="postDate" column="post_date"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="likeAmount" column="like_amount"/>
+        <result property="memberCode" column="member_code"/>
+        <result property="postModifyDate" column="post_modify_date"/>
+    </resultMap>
+    <select id="selectMonthLikePost" resultMap="monthLikePostResultMap" parameterType="hashmap">
+        SELECT
+        post_id,
+        post_title,
+        post_content,
+        post_date,
+        category_id,
+        like_amount,
+        member_code,
+        post_modify_date
+        FROM post
+        WHERE DATE_FORMAT(post_date, '%Y-%m') = #{postDate}
+        AND like_amount >= #{likeAmount}
+    </select>
+
+    <resultMap id="selectPostList" type="com.teamphoenix.ahub.postreply.query.mapper.PostMapper">
+        <id property="postId" column="post_id"/>
+        <result property="postTitle" column="post_title"/>
+        <result property="postDate" column="post_date"/>
+    </resultMap>
+    <resultMap id="getOrdinaryView" type="com.teamphoenix.ahub.postreply.query.dto.PostDTO" extends="selectPostList">
+        <result property="memberCode" column="member_code"/>
+        <result property="postContent" column="post_content"/>
+    </resultMap>
+
+    <select id="getPost" parameterType="_int" resultMap="getOrdinaryView">
+        SELECT
+        P.post_id
+        , P.post_title
+        , P.post_content
+        , P.post_date
+        , P.member_code
+        FROM post P
+        WHERE P.post_id = #{postId} ;
+    </select>
+
+    <select id="selectPostsByCondition" parameterType="com.teamphoenix.ahub.postreply.query.dto.PostDTO" resultMap="selectPostList">
+        SELECT
+        P.post_id
+        , P.post_title
+        , P.post_date
+        FROM post P
+        <where>
+            <if test="postTitle neq null and zContent eq null">
+                P.post_title LIKE CONCAT ('%', #{postTitle}, '%')
+            </if>
+            <if test="postContent neq null and postTitle eq null">
+                P.post_content LIKE CONCAT('%', #{postContent}, '%')
+            </if>
+            <if test="postTitle neq null and postContent neq null">
+                P.post_title LIKE CONCAT('%', #{postTitle}, '%')
+                AND P.post_content LIKE CONCAT('%', #{postContent}, '%')
+            </if>
+        </where>
+    </select>
+
+</mapper>
