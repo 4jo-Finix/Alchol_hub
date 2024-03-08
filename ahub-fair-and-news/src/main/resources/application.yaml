@@ -1,12 +1,12 @@
 server:
-    port: 0
+    port: 10003
 
 spring:
     datasource:
         driver-class-name: org.mariadb.jdbc.Driver
-        url: jdbc:mariadb://localhost:3306/ahubdb
+        url: jdbc:mariadb://localhost:3306/root
         username: root
-        password: root
+        password: mariadb
         
     application:
         name: fair-and-news-service

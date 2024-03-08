@@ -1,0 +1,52 @@
+### POST new News Post
+POST localhost:10003/board/new
+Content-Type: application/json
+
+{
+  "newsTitle": "새롭게 등록된 뉴스 정보 게시글입니다!",
+  "newsContent": "새롭게 등록된 뉴스 게시글 내용 !"
+}
+
+
+### PUT News Post (title only)
+PUT localhost:10003/board/12
+Content-Type: application/json
+
+{
+  "newsId": 12,
+  "newsTitle": "수정된 뉴스 게시글 제목",
+  "newsContent": "새롭게 등록된 뉴스 게시글 내용 !",
+  "newsWritedate": "2024-03-04T00:12:34.500",
+  "useAcceptance": 1,
+  "memberCode": 1
+}
+
+### PUT News Post (content only)
+PUT localhost:10003/board/12
+Content-Type: application/json
+
+{
+  "newsId": 12,
+  "newsTitle": "새롭게 등록된 뉴스 정보 게시글입니다!",
+  "newsContent": "뉴스 정보 게시글의 내용을 수정하였습니다",
+  "newsWritedate": "2024-03-04T00:12:34.500",
+  "useAcceptance": 1,
+  "memberCode": 1
+}
+
+### PUT News Post (title & content)
+PUT localhost:10003/board/9
+Content-Type: application/json
+
+{
+  "newsId": 9,
+  "newsTitle": "수정된 뉴스 게시글 제목",
+  "newsContent": "뉴스 제목&내용 수정 테스트의 내용 입니다.",
+  "newsWritedate": "2024-03-04T00:12:34.500",
+  "useAcceptance": 1,
+  "memberCode": 1
+}
+
+### DELETE Fair Post
+DELETE  localhost:10003/board/9
+
