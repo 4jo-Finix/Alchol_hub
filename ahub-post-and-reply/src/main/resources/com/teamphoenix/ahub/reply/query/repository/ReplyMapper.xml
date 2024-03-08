@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teamphoenix.ahub.reply.query.repository.ReplyMapper">
+    <resultMap id="replyResultMap" type="com.teamphoenix.ahub.reply.query.entity.Reply">
+        <id property="replyId" column="REPLY_ID"/>
+        <result property="postId" column="POST_ID"/>
+        <result property="replyContent" column="REPLY_CONTENT"/>
+        <result property="replyDate" column="REPLY_DATE"/>
+        <result property="reportAcceptance" column="REPORT_ACCEPTANCE"/>
+        <result property="useAcceptance" column="USE_ACCEPTANCE"/>
+        <result property="memberCode" column="MEMBER_CODE"/>
+    </resultMap>
+    <select id="selectAllReply" resultMap="replyResultMap">
+        SELECT
+            REPLY_ID,
+            POST_ID,
+            REPLY_CONTENT,
+            REPLY_DATE,
+            REPORT_ACCEPTANCE,
+            USE_ACCEPTANCE,
+            MEMBER_CODE
+         FROM REPLY
+    </select>
+    <select id="selectAllReplyInBoard" parameterType="_int" resultMap="replyResultMap" >
+        SELECT
+            REPLY_CONTENT,
+            REPLY_DATE,
+            MEMBER_CODE
+          FROM REPLY
+         WHERE POST_ID = #{post_id}
+    </select>
+    <select id="selectReplyBySearch" parameterType="string" resultMap="replyResultMap" >
+        SELECT
+            REPLY_CONTENT,
+            REPLY_DATE,
+            MEMBER_CODE
+          FROM REPLY
+        WHERE REPLY_CONTENT LIKE CONCAT('%', #{value}, '%')
+    </select>
+    <select id="selectReplyByWriter" parameterType="_int" resultMap="replyResultMap" >
+        SELECT
+            REPLY_CONTENT,
+            REPLY_DATE,
+            MEMBER_CODE
+          FROM REPLY
+        WHERE MEMBER_CODE = #{value}
+    </select>
+
+
+
+
+
+
+
+
+</mapper>

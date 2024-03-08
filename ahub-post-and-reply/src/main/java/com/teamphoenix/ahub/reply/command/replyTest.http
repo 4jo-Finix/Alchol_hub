@@ -1,0 +1,22 @@
+### 댓글 추가 TEST
+POST localhost:8000/reply/regist
+Content-Type: application/json
+
+{
+  "postId" : 2,
+  "replyContent" : "댓글 추가 test!!!!!!!",
+  "reportAcceptance" : "0",
+  "useAcceptance" : "1",
+  "memberCode" : 2
+}
+
+### 댓글 수정 TEST
+PUT localhost:8000/reply/modify/6
+Content-Type: application/json
+
+{
+  "replyContent": "댓글이 수정이 됐나요~?"
+}
+
+### 댓글 삭제 TEST
+DELETE localhost:8000/reply/delete/10
