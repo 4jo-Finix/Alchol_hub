@@ -92,7 +92,7 @@ spring:
             - Method=POST, PUT, DELETE
             #          filters:
           filters:
-            - RewritePath=/member-service/(?<segment>.*), /$\{segment}
+            - RewritePath=/member-service/member/(?<segment>.*), /member/$\{segment}
 
         # Member Service GET
         - id: member-search
@@ -101,7 +101,7 @@ spring:
             - Path=/member-service/**
             - Method=GET
           filters:
-            - RewritePath=/member-service/(?<segment>.*), /$\{segment}
+            - RewritePath=/member-service/member/(?<segment>.*), /member/$\{segment}
 
             # Member Service POST, PUT, DELETE
         - id: member-modify
@@ -110,4 +110,4 @@ spring:
             - Path=/member-service/**
             - Method=POST, PUT, DELETE
           filters:
-            - RewritePath=/member-service/(?<segment>.*), /$\{segment}
+            - RewritePath=/member-service/member/(?<segment>.*), /member/$\{segment}
