@@ -1,0 +1,14 @@
+### GET post Post
+GET localhost:10003/posts
+
+### GET post List (no condition)
+GET localhost:10003/posts/lists
+
+### GET post List (title)
+GET localhost:10003/posts/lists?st=Post1
+
+### GET post List (content)
+GET localhost:10003/posts/lists?sc=1
+
+### GET post List (title&content)
+GET localhost:10003/posts/lists?st=2&sc=2
