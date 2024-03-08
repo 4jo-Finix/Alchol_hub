@@ -8,7 +8,7 @@ spring:
     password: phoenix
 
 server:
-  port: 10001
+  port: 0
 
 eureka:
   client:
