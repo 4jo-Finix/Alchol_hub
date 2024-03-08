@@ -10,11 +10,11 @@ import java.util.Map;
 public interface MemberMapper {
     List<MemberDTO> selectAllMembers();
 
-    MemberDTO selectByMemberCode(Map<String, Integer> memberCode);
+    MemberDTO selectByMemberCode(int memberCode);
 
-    MemberDTO selectByMemberId(Map<String, String> memberId);
+    MemberDTO selectByMemberId(String memberId);
 
-    MemberDTO selectMyprofile(Map<String, String> memberId);
+    MemberDTO selectMyprofile(String memberId);
 
     MemberDTO memberLogin(Map<String, String> memberLogin);
 }

@@ -34,6 +34,9 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'		// @Entity 사용
 	implementation 'org.modelmapper:modelmapper:3.2.0'	// modelMapper 사용
+
+	// feign client 추가
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 }
 
 dependencyManagement {

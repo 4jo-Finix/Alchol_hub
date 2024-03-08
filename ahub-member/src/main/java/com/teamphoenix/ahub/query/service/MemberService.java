@@ -1,7 +1,9 @@
 package com.teamphoenix.ahub.query.service;
 
+import com.teamphoenix.ahub.query.client.PostAndReplyServiceClient;
 import com.teamphoenix.ahub.query.dto.MemberDTO;
 import com.teamphoenix.ahub.query.mapper.MemberMapper;
+import com.teamphoenix.ahub.query.vo.ResponsePostAndReply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +14,13 @@ import java.util.Scanner;
 
 @Service
 public class MemberService {
-    private MemberMapper memberMapper;
+    private final MemberMapper memberMapper;
+    private final PostAndReplyServiceClient postAndReplyServiceClient;
 
     @Autowired
-    public MemberService(MemberMapper memberMapper) {
+    public MemberService(MemberMapper memberMapper, PostAndReplyServiceClient postAndReplyServiceClient) {
         this.memberMapper = memberMapper;
+        this.postAndReplyServiceClient = postAndReplyServiceClient;
     }
 
     public List<MemberDTO> selectAllMembers(){
@@ -30,19 +34,14 @@ public class MemberService {
     public MemberDTO selectByMemberCode(String inputMemberCode){
         int intMemberCode = Integer.valueOf(inputMemberCode);
 
-        Map<String, Integer> memberCode = new HashMap<>();
-        memberCode.put("memberCode", intMemberCode);
-
-        MemberDTO member = memberMapper.selectByMemberCode(memberCode);
+        MemberDTO member = memberMapper.selectByMemberCode(intMemberCode);
 
         return member;
     }
 
     public MemberDTO selectByMemberId(String inputMemberId){
-        Map<String, String> memberId = new HashMap<>();
-        memberId.put("memberId", inputMemberId);
 
-        MemberDTO member = memberMapper.selectByMemberId(memberId);
+        MemberDTO member = memberMapper.selectByMemberId(inputMemberId);
 
         return member;
     }
@@ -50,16 +49,12 @@ public class MemberService {
     public int getMemberCode(String currentMemberId){
         int memberCode = 0;
 
-
         return memberCode;
     }
 
     public MemberDTO selectMyprofile(String currentMemberId){
 
-        Map<String, String> memberId = new HashMap<>();
-        memberId.put("memberId", currentMemberId);
-
-        MemberDTO member = memberMapper.selectMyprofile(memberId);
+        MemberDTO member = memberMapper.selectMyprofile(currentMemberId);
 
         return member;
     }

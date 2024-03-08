@@ -1,8 +1,5 @@
 package com.teamphoenix.ahub.query.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teamphoenix.ahub.query.dto.MemberDTO;
 import com.teamphoenix.ahub.query.service.MemberService;
 import com.teamphoenix.ahub.query.vo.RequestMember;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import org.modelmapper.ModelMapper;
 import java.util.List;
-import java.util.Scanner;
 
 @RestController
 @RequestMapping("/member")
@@ -31,52 +27,37 @@ public class MemberController {
 
     @GetMapping("/findAllMembers")
     public List<MemberDTO> findAllMembers() {
-        /* 프론트 작업 후 사용자 입력을 받아오는 코드 추가 */
 
         return memberService.selectAllMembers();
     }
 
-    @GetMapping("/findByMemberCode")
-    public MemberDTO findByMemberCode() {
-        Scanner sc =  new Scanner(System.in);
-        System.out.print("회원 코드 입력: ");
-        String inputMemberCode = sc.nextLine();
+     @GetMapping("/findByMemberCode/{memberCode}")
+    public MemberDTO findByMemberCode(@PathVariable("memberCode") String memberCode) {
 
-        return memberService.selectByMemberCode(inputMemberCode);
+        return memberService.selectByMemberCode(memberCode);
     }
 
-    @GetMapping("/findByMemberId")
-    public MemberDTO findByMemberId() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("조회할 회원 아이디를 입력: ");
-        String inputMemberId = sc.nextLine();
+    @GetMapping("/findByMemberId/{memberId}")
+    public MemberDTO findByMemberId(@PathVariable("memberId") String memberId) {
 
-        return memberService.selectByMemberId(inputMemberId);
+        return memberService.selectByMemberId(memberId);
     }
 
-    @PostMapping("/findMyprofile")
-    public ResponseEntity<MyProfileResponseMember> selectMyprofile(@RequestBody String currentMemberId) {
+    @GetMapping("/findMyprofile/{memberId}")
+    public ResponseEntity<MyProfileResponseMember> selectMyprofile(@PathVariable("memberId") String memberId) {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            JsonNode jsonNode = objectMapper.readTree(currentMemberId);
-            String memberId = jsonNode.get("currentMemberId").asText();
 
-            MemberDTO myProfile = memberService.selectMyprofile(memberId);
+        MemberDTO myProfile = memberService.selectMyprofile(memberId);
 
-            MyProfileResponseMember myProfileResponseMember = new MyProfileResponseMember();
-            myProfileResponseMember.setMemberId(myProfile.getMemberId());
-            myProfileResponseMember.setMemberName(myProfile.getMemberName());
-            myProfileResponseMember.setMemberAddr(myProfile.getMemberAddr());
-            myProfileResponseMember.setMemberEmail(myProfile.getMemberEmail());
-            myProfileResponseMember.setMemberPhone(myProfile.getMemberPhone());
-            myProfileResponseMember.setRestrictStartDate(myProfile.getRestrictStartDate());
+        MyProfileResponseMember myProfileResponseMember = new MyProfileResponseMember();
+        myProfileResponseMember.setMemberId(myProfile.getMemberId());
+        myProfileResponseMember.setMemberName(myProfile.getMemberName());
+        myProfileResponseMember.setMemberAddr(myProfile.getMemberAddr());
+        myProfileResponseMember.setMemberEmail(myProfile.getMemberEmail());
+        myProfileResponseMember.setMemberPhone(myProfile.getMemberPhone());
+        myProfileResponseMember.setRestrictStartDate(myProfile.getRestrictStartDate());
 
-            return ResponseEntity.status(HttpStatus.OK).body(myProfileResponseMember);
-
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        return ResponseEntity.status(HttpStatus.OK).body(myProfileResponseMember);
     }
 
     /* 설명. 회원 로그인에 security 적용하기 */

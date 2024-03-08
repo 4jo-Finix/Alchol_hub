@@ -3,6 +3,7 @@ package com.teamphoenix.ahub.query.dto;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,9 +26,8 @@ public class MemberDTO {
     private int accessAcceptancce;
     private int withdrawalAcceptance;
     private int memberCategoryId;
-
     /* 설명. 전체 회원 조회용(관리자) */
-    public MemberDTO(int memberCode, String memberId, String memberName, String memberPwd, String memberEmail, String memberAddr, String memberPhone, int blacklistStatus, int memberCategoryId) {
+    public MemberDTO(int memberCode, String memberId, String memberName, String memberPwd, String memberEmail, String memberAddr, String memberPhone, int blacklistStatus) {
         this.memberId = memberId;
         this.memberName = memberName;
         this.memberPwd = memberPwd;
@@ -35,7 +35,6 @@ public class MemberDTO {
         this.memberAddr = memberAddr;
         this.memberPhone = memberPhone;
         this.blacklistStatus = blacklistStatus;
-        this.memberCategoryId = memberCategoryId;
     }
 
     /* 설명. 회원 프로필 조회용 */

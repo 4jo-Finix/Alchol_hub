@@ -4,6 +4,7 @@ import com.teamphoenix.ahub.command.aggregate.MemberInfo;
 import com.teamphoenix.ahub.command.dto.MemberDTO;
 import com.teamphoenix.ahub.command.repository.MemberRepository;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,9 @@ public class MemberServiceImpl implements MemberService{
 
         int memberCode = getMemberCode(memberId);
 
-        MemberInfo modifyValue = memberRepository.findById(memberCode).orElseThrow(IllegalAccessError::new);
+        MemberInfo modifyValue = memberRepository.findById(memberCode)
+                .orElseThrow( () -> { return new NotFoundException("존재하지 않는 사용자입니다.");
+                    });
         modifyValue.setMemberName(modifyMember.getMemberName());
         modifyValue.setMemberPwd(modifyMember.getMemberPwd());
         modifyValue.setMemberEmail(modifyMember.getMemberEmail());
