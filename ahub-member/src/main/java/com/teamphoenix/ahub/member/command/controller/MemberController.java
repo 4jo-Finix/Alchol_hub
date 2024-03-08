@@ -32,7 +32,8 @@ public class MemberController {
     public ResponseEntity<ResponseMember> registMember(@RequestBody RequestMember newMember) {
         MemberDTO newMemberInfo = modelMapper.map(newMember, MemberDTO.class);
         newMemberInfo.setMemberCategoryId(2);
-        newMemberInfo.setRestrictStartDate(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yy년MM월dd일"))));
+        newMemberInfo.setRestrictStartDate(LocalDateTime.now());
+//        newMemberInfo.setRestrictStartDate(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yy년MM월dd일"))));
 
         memberService.registMember(newMemberInfo);
         String newMemberId = newMemberInfo.getMemberId();
@@ -49,7 +50,8 @@ public class MemberController {
     /* 회원 정보 수정 */
     @PutMapping("/modify/{memberId}")
     public ResponseEntity<ResponseMember> modifyMember(@PathVariable("memberId") String memberId, @RequestBody MemberDTO modifyMemberInfo) {
-        modifyMemberInfo.setRestrictStartDate(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yy년MM월dd일"))));
+//        modifyMemberInfo.setRestrictStartDate(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yy년MM월dd일"))));
+        modifyMemberInfo.setRestrictStartDate(LocalDateTime.now());
         modifyMemberInfo.setMemberCategoryId(2);
 
         String CurrentMemberId = modifyMemberInfo.getMemberId();

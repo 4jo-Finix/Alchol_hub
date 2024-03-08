@@ -24,8 +24,10 @@ dependencies {
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 	implementation 'org.projectlombok:lombok'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
+	testImplementation 'org.springframework.security:spring-security-test'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
 	// dependency 추가
@@ -37,6 +39,17 @@ dependencies {
 
 	// feign client 추가
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+	// 암호화를 위한 spring security 추가
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// jwt 토큰을 생성 / 해석 하는데 필요한 라이브러리들
+	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 }
 
 dependencyManagement {
