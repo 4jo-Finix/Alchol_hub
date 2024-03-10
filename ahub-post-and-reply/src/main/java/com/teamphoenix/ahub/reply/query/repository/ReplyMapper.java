@@ -14,5 +14,5 @@ public interface ReplyMapper {
 
     List<Reply> selectReplyBySearch(String searchingValue);
 
-    List<Reply> selectReplyByWriter(int memberId);
+    List<Reply> selectReplyByWriter(int memberCode);
 }

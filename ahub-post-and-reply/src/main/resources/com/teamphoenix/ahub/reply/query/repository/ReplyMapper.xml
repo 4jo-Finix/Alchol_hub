@@ -12,17 +12,6 @@
         <result property="useAcceptance" column="USE_ACCEPTANCE"/>
         <result property="memberCode" column="MEMBER_CODE"/>
     </resultMap>
-    <select id="selectAllReply" resultMap="replyResultMap">
-        SELECT
-            REPLY_ID,
-            POST_ID,
-            REPLY_CONTENT,
-            REPLY_DATE,
-            REPORT_ACCEPTANCE,
-            USE_ACCEPTANCE,
-            MEMBER_CODE
-         FROM REPLY
-    </select>
     <select id="selectAllReplyInBoard" parameterType="_int" resultMap="replyResultMap" >
         SELECT
             REPLY_CONTENT,

@@ -24,14 +24,14 @@ public class ReplyController {
         this.replyService = replyService;
     }
 
-    @GetMapping("/member/{memberId}")
-    public List<ReplyDTO> selectReplyByWriter(@PathVariable int memberId) {
-        return replyService.selectReplyByWriter(memberId);
+    @GetMapping("/member/{memberCode}")
+    public List<ReplyDTO> selectReplyByWriter(@PathVariable int memberCode) {
+        return replyService.selectReplyByWriter(memberCode);
     }
 
-    @GetMapping("/board/replies/{boardId}")
-    public List<ReplyDTO> selectAllReplyInBoard(@PathVariable int boardId) {
-        return replyService.selectAllReplyInBoard(boardId);
+    @GetMapping("/board/replies/{postId}")
+    public List<ReplyDTO> selectAllReplyInBoard(@PathVariable int postId) {
+        return replyService.selectAllReplyInBoard(postId);
     }
 
     @GetMapping("/board/search/{inputValue}")

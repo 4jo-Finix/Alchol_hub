@@ -69,10 +69,8 @@ public class ReplyServiceImpl implements ReplyService{
     @Override
     public ReplyWithMemberNameVo getReplyWithMemberNameById(int memberId) {
         MemberResponse memberName = replyServiceClient.getMemberName(memberId);
-        System.out.println(memberName);
 
         Optional<Reply> reply = replyRespository.findById(memberId);
-        System.out.println(reply);
         ReplyWithMemberNameVo replyWithMemberNameVo = mapper.map(reply, ReplyWithMemberNameVo.class);
 
         replyWithMemberNameVo.setMemberName(memberName.getMemberName());

@@ -48,7 +48,7 @@ public class ReplyController {
     }
 
     @GetMapping("/member/test/{memberId}")
-    public ResponseEntity<?> getReplyWithMemberName(@PathVariable("memberId") int memberId) {
+    public ResponseEntity<ReplyWithMemberNameVo> getReplyWithMemberName(@PathVariable("memberId") int memberId) {
         ReplyWithMemberNameVo replyWithMemberNameVo = replyService.getReplyWithMemberNameById(memberId);
 
 

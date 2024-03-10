@@ -42,8 +42,8 @@ public class ReplyServiceImpl implements ReplyService{
     }
 
     @Override
-    public List<ReplyDTO> selectReplyByWriter(int memberId) {
-        List<Reply> replies = replyMapper.selectReplyByWriter(memberId);
+    public List<ReplyDTO> selectReplyByWriter(int memberCode) {
+        List<Reply> replies = replyMapper.selectReplyByWriter(memberCode);
         replies.forEach(System.out::println);
 
         return replies.stream().map(reply -> mapper.map(reply, ReplyDTO.class)).collect(Collectors.toList());

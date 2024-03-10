@@ -14,6 +14,6 @@ public interface ReplyService {
     List<ReplyDTO> selectReplyBySearch(String searchingValue);
 
 
-    List<ReplyDTO> selectReplyByWriter(int memberId);
+    List<ReplyDTO> selectReplyByWriter(int memberCode);
 
 }
