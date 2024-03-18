@@ -47,6 +47,15 @@ dependencies {
 	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
+	//config 클라이언트용 디펜던시
+	// config 서버 활용 시 추가할 내용(JWT 토큰값 관련 설정 서버 활용)
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	// application.yml 이전에 활용될 설정 파일을 사용하기 위한 디펜던시 추가
+	implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
+	// config 서버 추가 후 config 서버 refresh 를 위해 추가한 디펜던시
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+
 }
 
 dependencyManagement {

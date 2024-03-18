@@ -90,4 +90,11 @@ public class MemberController {
         return memberService.findMemberIdList(findCode);
     }
 
+    @GetMapping("/request-code/{userId}")
+    public int getWriterCode(@PathVariable("userId") String userId){
+        MemberDTO memberDTO = memberService.selectByMemberId(userId);
+
+        return memberDTO.getMemberCode();
+    };
+
 }

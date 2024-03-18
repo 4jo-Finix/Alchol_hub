@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 
 @RestController(value = "newsCommandController")
-@RequestMapping("/board")
+@RequestMapping("/news")
 public class NewsController {
 
     private final NewsService newsService;

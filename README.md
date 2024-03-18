@@ -39,12 +39,12 @@
 
 Ahub 프로젝트의 산출 결과물은 다음과 같습니다.
 
-- 요구사항 명세서 : 프로젝트의 요구사항을 정리하여 기능별로 분류해둔 문서 
-- 도메인 기반 개발(DDD) Context-map : 프로젝트의 기능을 도메인으로 나누고, 생성된 도메인을 중요도에 따라 핵심,지원,일반으로 분류 
-- 데이터베이스 논리/물리모델 : 프로젝트에 사용할 데이터베이스 생성을 위해 논리/물리 모델링을 구현 
-- 웹 어플리케이션 실행 파일 : 실제 기능들이 구현되는 프로젝트 파일   
-- 테스트 케이스 정의서: 요구사항에 해당하는 테스트를 작성 및 진행, 해당 결과를 보여주는 문서 
-- REST-API 명세서: REST-API의 테스트 결과를 보여주는 문서 
+- **요구사항 명세서** : 프로젝트의 요구사항을 정리하여 기능별로 분류해둔 문서 
+- **도메인 주도 개발(DDD) 설계도** : 프로젝트의 기능을 도메인으로 나누고, 생성된 도메인을 중요도에 따라 핵심,지원,일반으로 분류 
+- **데이터베이스 논리/물리모델** : 프로젝트에 사용할 데이터베이스 생성을 위해 논리/물리 모델링을 구현 
+- **웹 어플리케이션 실행 파일** : 실제 기능들이 구현되는 프로젝트 파일   
+- **테스트 케이스 정의서** : 요구사항에 해당하는 테스트를 작성 및 진행, 해당 결과를 보여주는 문서 
+- **REST-API 명세서** : REST-API의 테스트 결과를 보여주는 문서 
 
 ## 2-1 추진 계획
 
@@ -55,16 +55,21 @@ Ahub 프로젝트의 산출 결과물은 다음과 같습니다.
 | 주관 | 불4조 (Team Phoenix) | 백엔드 프로젝트 |
 | 지원기관 | 한화시스템x엔코아 | 장비 지원 및 퀄리티 점검 |
 
-프로젝트 일정: 2024-02-26 ~ 2024-03-11
+**프로젝트 일정** : 2024-02-26 ~ 2024-03-11
 
-작업 공간: 서울 동작구 보라매로 SFC빌딩, 원격 소통
+**작업 공간** : 서울 동작구 보라매로 SFC빌딩, 원격 소통
 
-기술 스택: 
-MariaDB 10.6, OpenJDK 17.0.7, Spring Boot Framework 3.0.3, Spring security 6 <br>
-Spring Data JPA, MyBatis, Spring Cloud Gateway 
+**기술 스택** : <img src ="https://img.shields.io/badge/MariaDB-&logo=MariaDB"/><img src="https://img.shields.io/badge/10.6-515151?style=for-the-badge" width="40" height="20"/> <img src="https://img.shields.io/badge/OpenJDK-&logo=openjdk"><img src="https://img.shields.io/badge/17.0.3-515151?style=for-the-badge" width="40" height="20"/>
+<img src ="https://img.shields.io/badge/Spring Boot-&logo=Spring Boot"/><img src="https://img.shields.io/badge/3.0.3-515151?style=for-the-badge" width="50" height="20"/> 
+<img src="https://img.shields.io/badge/Spring Security-&logo=spring security" width="70" height="20"/>
+<img src="https://img.shields.io/badge/Spring Data JPA-&logo=spring data jpa" width="100" height="20"/>
+<img src="https://img.shields.io/badge/MyBatis-&logo=mybatis" width="50" height="20"/>
+<img src="https://img.shields.io/badge/Spring Cloud Gateway-&logo=spring cloud gateway" width="100" height="20"/>
+
 
 ## 2-2  일정관리 (WBS)
-![image](https://github.com/4jo-Phoenix/Alcohol_hub/assets/108782390/3437f986-b25e-4e4f-8947-75a3a5a241d1)
+
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/096d31f2-a412-42ac-9060-40e8ed8ea18d)
 
 <br>
 
@@ -75,17 +80,23 @@ Spring Data JPA, MyBatis, Spring Cloud Gateway
 ## 3-1 요구사항 명세서
 ![image](https://github.com/4jo-Phoenix/Alcohol_hub/assets/108782390/c35bf325-8f7f-4afa-9dc5-db1f2e128f85)
     
-## 3-2. DDD Context map
+## 3-2. DDD 
+
+- Event Storming <br>
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/8010e804-a156-49aa-bdeb-6b9a92508bb0)
+
+- Bounded Context
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/bad37322-a598-4c3c-9977-cc160471a7b1)
+
+- Context Map
 ![image](https://github.com/4jo-Phoenix/Alcohol_hub/assets/108782390/b6a80658-3d07-4161-b46c-78e96c188ae9)
 
 
 ## 3-3 DB 모델링
 -  DA# 논리 모델 
-
 ![image](https://github.com/4jo-Phoenix/Alcohol_hub/assets/108782390/ac63be56-bcb9-4715-921d-21f4c9ccf151)
 
 - DA# 물리 모델
-
 ![image](https://github.com/4jo-Phoenix/Alcohol_hub/assets/108782390/092dabe3-8721-4ef9-9dbc-d9867ba43579)
 
 ## 3-4 네트워크 아키텍처 
@@ -177,7 +188,15 @@ Spring Data JPA, MyBatis, Spring Cloud Gateway
 
 <details>
 <summary>Test Result</summary>
- 
+<br> 
+
+**CRUD** <br>
+ ![포스트서비스임플테스트](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/153909291/be9d68f3-931e-4122-8b7d-3f356089bc71)
+
+
+**SELECT** <br>
+![포스트서비스테스트](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/153909291/380c4f98-feea-40dd-ac2f-6f5a41570df2)
+
 
 </details>
 
@@ -876,7 +895,103 @@ Spring Data JPA, MyBatis, Spring Cloud Gateway
 
 </details>
 
+---
+
+- **REST-API(News) Definition Table**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/a346e044-24a1-41b7-bff2-12b22090ff67)
+
+<details>
+<summary>AH-NEWS-001</summary>
+
+- **Request Header**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/2d927184-72dc-47b2-9e73-23cffa972532)
+
+- **Request Body**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/c5ebd1b1-d2ef-41bb-a6a2-d469dde2d5c7)
+
+- **Response Header**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/bd430bf4-a28b-4860-b378-54118eec7866)
+
+- **Response Body**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/50ccc6b9-59ad-4e82-8c2d-c774eb8eb266)
+
 </details>
+
+<details>
+<summary>AH-NEWS-002</summary>
+
+- **Request Header**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/33d7edbf-2911-4c96-8e6b-abf1212cdf96)
+
+- **Request Body**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/1ee92c23-78d2-4134-a743-f67f78fed6cb)
+
+- **Response Header**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/20bbe6b1-eb44-41ef-8972-a0484baa242d)
+
+- **Response Body**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/6b0affa0-b2df-481e-a639-295957249b54)
+
+
+</details>
+
+<details>
+<summary>AH-NEWS-003</summary>
+
+- **Request Header**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/2278bc58-5e2f-41b5-baf6-54f1d037f2c5)
+
+
+- **Request Body**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/fde64076-41ad-46a9-919e-9eefeb4feef2)
+
+
+- **Response Header**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/6a6f7878-ef18-481c-b6a7-67d3331c78ab)
+
+
+- **Response Body**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/3eff8be9-4ed2-4541-8224-23bc4dc6e4e5)
+
+</details>
+
+<details>
+<summary>AH-NEWS-004</summary>
+
+- **Request Header**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/93a0c4f9-4dd0-4352-a9df-14f12305d361)
+
+
+- **Request Body**
+<br> none
+
+- **Response Header**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/b0647994-f8ba-4a12-918a-10f97cb02c66)
+
+
+- **Response Body**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/c7a07d44-542f-4849-aa46-228436b99742)
+
+</details>
+
+<details>
+<summary>AH-NEWS-005</summary>
+
+- **Request Header**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/ddb28564-3c7e-467a-baa8-cf5809966854)
+
+- **Request Body**
+<br> none
+
+- **Response Header**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/9d737e4b-7791-4512-8065-57eca5f90246)
+
+- **Response Body**
+![image](https://github.com/beyond-sw-camp/be04-2nd-4team-ahub/assets/108782390/953ba93a-d427-482c-bc3c-cc7dea1d7d42)
+
+</details>
+
+<br>
 
 # 5. 프로젝트 회고
 

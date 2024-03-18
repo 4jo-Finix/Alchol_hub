@@ -1,5 +1,6 @@
 package com.teamphoenix.ahub.fair.query.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class FairDTO {
@@ -11,6 +12,13 @@ public class FairDTO {
     private int useAcceptance;
     private int memberCode;  // fk로 불러온 회원 코드와 매치
     private String writerId;
+    private String fairTag1;
+    private String fairTag2;
+    private String fairTag3;
+    private LocalDate fairStartdate;
+    private LocalDate fairEnddate;
+    private String fairLocation;
+    private String fairArea;
 
     public FairDTO() {
     }
@@ -41,6 +49,8 @@ public class FairDTO {
         this.memberCode = memberCode;
         this.writerId = writerId;
     }
+
+
 
     public int getFairId() {
         return fairId;
@@ -98,6 +108,62 @@ public class FairDTO {
         this.writerId = writerId;
     }
 
+    public String getFairTag1() {
+        return fairTag1;
+    }
+
+    public void setFairTag1(String fairTag1) {
+        this.fairTag1 = fairTag1;
+    }
+
+    public String getFairTag2() {
+        return fairTag2;
+    }
+
+    public void setFairTag2(String fairTag2) {
+        this.fairTag2 = fairTag2;
+    }
+
+    public String getFairTag3() {
+        return fairTag3;
+    }
+
+    public void setFairTag3(String fairTag3) {
+        this.fairTag3 = fairTag3;
+    }
+
+    public LocalDate getFairStartdate() {
+        return fairStartdate;
+    }
+
+    public void setFairStartdate(LocalDate fairStartdate) {
+        this.fairStartdate = fairStartdate;
+    }
+
+    public LocalDate getFairEnddate() {
+        return fairEnddate;
+    }
+
+    public void setFairEnddate(LocalDate fairEnddate) {
+        this.fairEnddate = fairEnddate;
+    }
+
+    public String getFairLocation() {
+        return fairLocation;
+    }
+
+    public void setFairLocation(String fairLocation) {
+        this.fairLocation = fairLocation;
+    }
+
+    public String getFairArea() {
+        return fairArea;
+    }
+
+    public void setFairArea(String fairArea) {
+        this.fairArea = fairArea;
+    }
+
     @Override
     public String toString() {
         return "FairDTO{" +
@@ -108,6 +174,13 @@ public class FairDTO {
                 ", useAcceptance=" + useAcceptance +
                 ", memberCode=" + memberCode +
                 ", writerId='" + writerId + '\'' +
+                ", fairTag1='" + fairTag1 + '\'' +
+                ", fairTag2='" + fairTag2 + '\'' +
+                ", fairTag3='" + fairTag3 + '\'' +
+                ", fairStartdate=" + fairStartdate +
+                ", fairEnddate=" + fairEnddate +
+                ", fairLocation='" + fairLocation + '\'' +
+                ", fairArea='" + fairArea + '\'' +
                 '}';
     }
 }

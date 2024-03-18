@@ -41,14 +41,12 @@ public class NewsServiceImpl implements NewsService {
 
         if (searchInfo.getWriterId() != null) {
             String writerId = searchInfo.getWriterId();
-            System.out.println("writerId = " + writerId);
-
-            ResponseMember resp = memberServiceClient.getWriterCode(writerId);
-            int searchCode = resp.getMemberCode();
+            int searchCode = memberServiceClient.getWriterCode(writerId);
             searchInfo.setMemberCode(searchCode);
         }
 
         List<NewsDTO> result = newsMapper.selectPostsByCondition(searchInfo);
+        System.out.println("result = " + result);
         List<String> codeList = new ArrayList<>();
 
         for (NewsDTO newsDTO : result) {
@@ -64,7 +62,7 @@ public class NewsServiceImpl implements NewsService {
             NewsDTO newsDTO = result.get(i);
             newsDTO.setWriterId(idList.get(i));
         }
-
+        System.out.println("result = " + result);
         return result;
     }
 }

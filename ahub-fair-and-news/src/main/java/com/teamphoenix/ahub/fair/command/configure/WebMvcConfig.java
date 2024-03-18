@@ -19,6 +19,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(bearerTokenInterceptor)
                 .addPathPatterns("/fairs/new")
+                .addPathPatterns("/fairs/{postNum}")
                 .addPathPatterns("/news/new");
     }
 }

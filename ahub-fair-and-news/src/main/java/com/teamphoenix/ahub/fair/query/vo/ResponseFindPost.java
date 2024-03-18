@@ -7,13 +7,13 @@ public class ResponseFindPost {
     private String code;
     private String message;
     private String url;
-    private FairDTO result;
+    private ResponseList result;
     private String writerId;
 
     public ResponseFindPost() {
     }
 
-    public ResponseFindPost(String code, String message, String url, FairDTO result) {
+    public ResponseFindPost(String code, String message, String url, ResponseList result) {
         this.code = code;
         this.message = message;
         this.url = url;
@@ -44,11 +44,11 @@ public class ResponseFindPost {
         this.url = url;
     }
 
-    public FairDTO getResult() {
+    public ResponseList getResult() {
         return result;
     }
 
-    public void setResult(FairDTO result) {
+    public void setResult(ResponseList result) {
         this.result = result;
     }
 

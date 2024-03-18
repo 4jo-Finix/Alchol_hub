@@ -7,11 +7,11 @@ public class ResponseStatus {
     private String code;
     private String message;
     private String url;
-    private FairDTO result;
+    private ResponsePost result;
 
     public ResponseStatus() {}
 
-    public ResponseStatus(String code, String message, String url, FairDTO result) {
+    public ResponseStatus(String code, String message, String url, ResponsePost result) {
         this.code = code;
         this.message = message;
         this.url = url;
@@ -42,11 +42,11 @@ public class ResponseStatus {
         this.url = url;
     }
 
-    public FairDTO getResult() {
+    public ResponsePost getResult() {
         return result;
     }
 
-    public void setResult(FairDTO result) {
+    public void setResult(ResponsePost result) {
         this.result = result;
     }
 

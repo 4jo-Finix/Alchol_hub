@@ -4,18 +4,23 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.teamphoenix.ahub.fair.query.repository.FairMapper">
 
-    <resultMap id="selectFairList" type="com.teamphoenix.ahub.fair.query.dto.FairDTO">
+    <resultMap id="fairList" type="com.teamphoenix.ahub.fair.query.dto.FairDTO">
         <id property="fairId" column="fair_id"/>
         <result property="fairTitle" column="fair_title"/>
+        <result property="fairContent" column="fair_content"/>
         <result property="fairWritedate" column="fair_writedate"/>
         <result property="useAcceptance" column="use_acceptance"/>
+        <result property="fairTag1" column="fair_tag1"/>
+        <result property="fairTag2" column="fair_tag2"/>
+        <result property="fairTag3" column="fair_tag3"/>
+        <result property="fairStartdate" column="fair_startdate"/>
+        <result property="fairEnddate" column="fair_enddate"/>
+        <result property="fairLocation" column="fair_location"/>
+        <result property="fairArea" column="fair_area"/>
         <result property="memberCode" column="member_code"/>
     </resultMap>
-    <resultMap id="getOrdinaryView" type="com.teamphoenix.ahub.fair.query.dto.FairDTO" extends="selectFairList">
-        <result property="fairContent" column="fair_content"/>
-    </resultMap>
 
-    <select id="getFairPost" parameterType="_int" resultMap="getOrdinaryView">
+    <select id="getFairPost" parameterType="_int" resultMap="fairList">
         SELECT
                F.fair_id
              , F.fair_title
@@ -23,17 +28,32 @@
              , F.fair_writedate
              , F.use_acceptance
              , F.member_code
+             , F.fair_tag1
+             , F.fair_tag2
+             , F.fair_tag3
+             , F.fair_startdate
+             , F.fair_enddate
+             , F.fair_location
+             , F.fair_area
           FROM fair F
          WHERE F.fair_id = #{fairId}
     </select>
 
-    <select id="selectPostsByCondition" parameterType="com.teamphoenix.ahub.fair.query.dto.FairDTO" resultMap="selectFairList">
+    <select id="selectPostsByCondition" parameterType="com.teamphoenix.ahub.fair.query.dto.FairDTO" resultMap="fairList">
         SELECT
                F.fair_id
              , F.fair_title
+             , F.fair_content
              , F.fair_writedate
              , F.use_acceptance
              , F.member_code
+             , F.fair_tag1
+             , F.fair_tag2
+             , F.fair_tag3
+             , F.fair_startdate
+             , F.fair_enddate
+             , F.fair_location
+             , F.fair_area
           FROM fair F
         <where>
             <if test="fairTitle neq null and fairContent eq null">
@@ -44,7 +64,7 @@
             </if>
             <if test="fairTitle neq null and fairContent neq null">
                 F.fair_title LIKE CONCAT('%', #{fairTitle}, '%')
-            AND F.fair_content LIKE CONCAT('%', #{fairContent}, '%')
+             OR F.fair_content LIKE CONCAT('%', #{fairContent}, '%')
             </if>
             <if test="memberCode neq 0">
                 F.member_code = #{memberCode}
