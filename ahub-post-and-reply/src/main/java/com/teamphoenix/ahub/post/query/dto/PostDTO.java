@@ -1,11 +1,14 @@
 package com.teamphoenix.ahub.post.query.dto;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDateTime;
 
 public class PostDTO {
 
     private int useAcceptance;
     private int likeAmount;
+    private int viewCount;
     private int reportedAcceptance;
     private int memberCode;
     private String postModifyDate;
@@ -18,23 +21,10 @@ public class PostDTO {
     public PostDTO() {
     }
 
-    public PostDTO(String postTitle, String postContent) {
-        this.postTitle = postTitle;
-        this.postContent = postContent;
-    }
-
-    public PostDTO(int postId, String postTitle, String postContent, String postDate, int categoryId, int memberCode) {
-        this.postId = postId;
-        this.postTitle = postTitle;
-        this.postContent = postContent;
-        this.postDate = postDate;
-        this.categoryId =  categoryId;
-        this.memberCode = memberCode;
-    }
-
-    public PostDTO(int useAcceptance, int likeAmount, int reportedAcceptance, int memberCode, String postModifyDate, int postId, String postTitle, String postContent, String postDate, int categoryId) {
+    public PostDTO(int useAcceptance, int likeAmount, int viewCount, int reportedAcceptance, int memberCode, String postModifyDate, int postId, String postTitle, String postContent, String postDate, int categoryId) {
         this.useAcceptance = useAcceptance;
         this.likeAmount = likeAmount;
+        this.viewCount = viewCount;
         this.reportedAcceptance = reportedAcceptance;
         this.memberCode = memberCode;
         this.postModifyDate = postModifyDate;
@@ -59,6 +49,14 @@ public class PostDTO {
 
     public void setLikeAmount(int likeAmount) {
         this.likeAmount = likeAmount;
+    }
+
+    public int getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(int viewCount) {
+        this.viewCount = viewCount;
     }
 
     public int getReportedAcceptance() {
@@ -130,13 +128,14 @@ public class PostDTO {
         return "PostDTO{" +
                 "useAcceptance=" + useAcceptance +
                 ", likeAmount=" + likeAmount +
+                ", viewCount=" + viewCount +
                 ", reportedAcceptance=" + reportedAcceptance +
                 ", memberCode=" + memberCode +
-                ", postModifyDate=" + postModifyDate +
+                ", postModifyDate='" + postModifyDate + '\'' +
                 ", postId=" + postId +
                 ", postTitle='" + postTitle + '\'' +
                 ", postContent='" + postContent + '\'' +
-                ", postDate=" + postDate +
+                ", postDate='" + postDate + '\'' +
                 ", categoryId=" + categoryId +
                 '}';
     }

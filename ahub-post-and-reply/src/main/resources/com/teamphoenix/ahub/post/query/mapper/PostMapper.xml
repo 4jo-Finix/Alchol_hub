@@ -11,6 +11,7 @@
         <result property="postDate" column="post_date"/>
         <result property="categoryId" column="category_id"/>
         <result property="likeAmount" column="like_amount"/>
+        <result property="viewCount" column="viewCount"/>
         <result property="memberCode" column="member_code"/>
         <result property="postModifyDate" column="post_modify_date"/>
     </resultMap>
@@ -22,6 +23,7 @@
         post_date,
         category_id,
         like_amount,
+        view_count,
         member_code,
         post_modify_date
         FROM post
@@ -41,6 +43,7 @@
             <result property="postDate" column="post_date"/>
             <result property="categoryId" column="category_id"/>
             <result property="likeAmount" column="like_amount"/>
+            <result property="viewCount" column="viewCount"/>
             <result property="memberCode" column="member_code"/>
             <result property="postModifyDate" column="post_modify_date"/>
         </collection>
@@ -57,6 +60,7 @@
         b.post_date,
         b.category_id,
         b.like_amount,
+        b.view_count,
         b.member_code,
         b.post_modify_date
         FROM liked_post a
@@ -71,6 +75,7 @@
         <result property="postDate" column="post_date"/>
         <result property="categoryId" column="category_id"/>
         <result property="likeAmount" column="like_amount"/>
+        <result property="viewCount" column="viewCount"/>
         <result property="memberCode" column="member_code"/>
         <result property="postModifyDate" column="post_modify_date"/>
     </resultMap>
@@ -82,6 +87,7 @@
         post_date,
         category_id,
         like_amount,
+        view_count,
         member_code,
         post_modify_date
         FROM post
@@ -96,6 +102,7 @@
         <result property="postDate" column="post_date"/>
         <result property="categoryId" column="category_id"/>
         <result property="likeAmount" column="like_amount"/>
+        <result property="viewCount" column="viewCount"/>
         <result property="memberCode" column="member_code"/>
         <result property="postModifyDate" column="post_modify_date"/>
     </resultMap>
@@ -107,6 +114,7 @@
         post_date,
         category_id,
         like_amount,
+        view_count,
         member_code,
         post_modify_date
         FROM post
@@ -114,27 +122,35 @@
         AND like_amount >= 10
     </select>
 
-    <resultMap id="selectPostList" type="com.teamphoenix.ahub.post.query.dto.PostDTO">
+    <update id="updateViewCountByPostId" parameterType="int">
+        UPDATE post SET view_count = view_count + 1 WHERE post_id = #{postId}
+    </update>
+
+    <resultMap id="getOrdinaryView" type="com.teamphoenix.ahub.post.query.dto.PostDTO">
         <id property="postId" column="post_id"/>
         <result property="postTitle" column="post_title"/>
-        <result property="postDate" column="post_date"/>
-    </resultMap>
-    <resultMap id="getOrdinaryView" type="com.teamphoenix.ahub.post.query.dto.PostDTO" extends="selectPostList">
-        <result property="memberCode" column="member_code"/>
         <result property="postContent" column="post_content"/>
+        <result property="postDate" column="post_date"/>
+        <result property="viewCount" column="view_count"/>
+        <result property="memberCode" column="member_code"/>
     </resultMap>
-
     <select id="getPost" parameterType="_int" resultMap="getOrdinaryView">
         SELECT
         P.post_id
         , P.post_title
         , P.post_content
         , P.post_date
+        , P.view_count
         , P.member_code
         FROM post P
         WHERE P.post_id = #{postId}
     </select>
 
+    <resultMap id="selectPostList" type="com.teamphoenix.ahub.post.query.dto.PostDTO">
+        <id property="postId" column="post_id"/>
+        <result property="postTitle" column="post_title"/>
+        <result property="postDate" column="post_date"/>
+    </resultMap>
     <select id="selectPostsByCondition" parameterType="com.teamphoenix.ahub.post.query.dto.PostDTO" resultMap="selectPostList">
         SELECT
         P.post_id

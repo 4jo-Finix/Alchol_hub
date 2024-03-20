@@ -22,5 +22,7 @@ public interface PostMapper {
 
     List<PostDTO> selectPostsByCondition(PostDTO searchInfo) ;
 
+    void updateViewCountByPostId(Integer postId);
+
 //    List<postDTO> selectAllPosts();
 }

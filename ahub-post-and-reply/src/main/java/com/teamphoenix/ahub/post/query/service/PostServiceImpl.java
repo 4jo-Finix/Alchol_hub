@@ -6,6 +6,7 @@ import com.teamphoenix.ahub.post.query.mapper.PostMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,11 +26,15 @@ public class PostServiceImpl implements PostService {
      * 해당 게시글의 게시글 번호(post_id)를 조건으로
      * 게시글 번호, 제목, 내용, 작성일, 작성자 를 조회해 오는 메소드
      * */
+    @Transactional
     public PostDTO getPost(int postId) {
 
-        // postId 의 밸류가 넘어와서 getPostNum 에 저장됨
+
+        // postId로 게시글 정보를 조회함
         PostDTO result = postMapper.getPost(postId);
-//        log.info("반환된 result 값 : {}", result);
+        // postId에 해당하는 게시글의 조회수 증가시킴
+        postMapper.updateViewCountByPostId(postId);
+        // 출력
         System.out.println(result);
 
         return result;
