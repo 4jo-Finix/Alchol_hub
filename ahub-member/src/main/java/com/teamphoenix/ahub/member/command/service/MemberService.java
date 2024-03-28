@@ -11,5 +11,8 @@ public interface MemberService extends UserDetailsService {
 
     void removeMember(String memberId);
 
-    MemberDTO searchMember(String name);
+    MemberDTO searchMember(String memberId);
+
+    // 토큰 발급을 위한 memberId 를 가져오는 메소드 추가
+    MemberDTO getUserDetailsByUserId(String memberId);
 }

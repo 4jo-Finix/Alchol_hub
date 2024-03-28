@@ -44,5 +44,11 @@ public class MemberInfo {
     private int withdrawalAcceptance;
     @Column(name = "member_category_id")
     private int memberCategoryId;
+    @Column(name = "member_introduction")
+    private String memberIntroduction;
+    @Column(name = "member_sns_id")
+    private String memberSnsId;
+    @Column(name = "sns_provider")
+    private String snsProvider;
 
 }

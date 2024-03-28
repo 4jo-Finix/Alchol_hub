@@ -31,9 +31,9 @@ public class MemberServiceImplTests {
     }
 
     static Stream<Arguments> getMemberInfo() {
-        return Stream.of(Arguments.of(new MemberDTO(1, "admin", "관리자", "admin01", "user01@gmail.com", "서울시 동작구", "010-1111-1111", 0,1)),
-                Arguments.of(new MemberDTO(2, "user01", "손세림", "pass01", "user02@gmail.com", "서울시 구로구", "010-2222-2222", 0,2)),
-                Arguments.of(new MemberDTO(3, "user02", "송동준", "pass02", "user03@gmail.com", "서울시 광진구", "010-3333-3333", 0,2))
+        return Stream.of(Arguments.of(new MemberDTO(1, "admin", "관리자", "admin01", "user01@gmail.com", "서울시 동작구", "010-1111-1111", "N",1)),
+                Arguments.of(new MemberDTO(2, "user01", "손세림", "pass01", "user02@gmail.com", "서울시 구로구", "010-2222-2222", "N",2)),
+                Arguments.of(new MemberDTO(3, "user02", "송동준", "pass02", "user03@gmail.com", "서울시 광진구", "010-3333-3333", "N",2))
         );
     }
 

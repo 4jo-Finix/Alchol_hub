@@ -15,7 +15,7 @@
         <result property="restrictStartDate" column="RESTRICT_START_DATE"/>
         <result property="restrictEndDate" column="RESTRICT_END_DATE"/>
         <result property="loginFailCount" column="LOGIN_FAIL_COUNT"/>
-        <result property="accessAcceptancce" column="ACCESS_ACCEPTANCE"/>
+        <result property="accessAcceptance" column="ACCESS_ACCEPTANCE"/>
         <result property="withdrawalAcceptance" column="WITHDRAWAL_ACCEPTANCE"/>
         <result property="memberCategoryId" column="MEMBER_CATEGORY_ID"/>
     </resultMap>

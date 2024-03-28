@@ -15,6 +15,5 @@ public class MyProfileResponseMember {
     private String memberEmail;
     private String memberAddr;
     private String memberPhone;
-    private LocalDateTime restrictStartDate;
 }
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teamphoenix.ahub.member.command.dto.MemberDTO;
 import com.teamphoenix.ahub.member.command.service.MemberService;
 import com.teamphoenix.ahub.member.command.vo.RequestLogin;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.FilterChain;
@@ -21,12 +22,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private MemberService memberService;
-    private Environment environment;
+    private final MemberService memberService;
+    private final Environment environment;
 
     public AuthenticationFilter(AuthenticationManager authenticationManager, MemberService memberService, Environment environment) {
         super(authenticationManager);
@@ -34,12 +36,11 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         this.environment = environment;
     }
 
-    // 인증을 시도할 때 동작하는 메소드 : POST 요청으로 /login 들어오기 때문에 로그인 정보가 requestbody에 담겨온다.
+    // 인증을 시도할 때 동작하는 메소드 : POST 요청으로 /login 들어오기 때문에 로그인 정보가 request body에 담겨온다.
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
         try {
-
             RequestLogin requestLogin =
                     new ObjectMapper().readValue(request.getInputStream(), RequestLogin.class);
 
@@ -62,19 +63,29 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         /* 성공해서 관리하고 있는 정보 (authResult)를 사용해 토큰을 만든다. */
         String userName = ((User)authResult.getPrincipal()).getUsername(); //로그인한 userid 가 나온다.
-        // getPrincipal() 이 뭔지 알아보기
+
+        MemberDTO userDetails = memberService.getUserDetailsByUserId(userName);
+
+        /* 회원 권한을 담을 List 생성 */
+        List<String> roles = new ArrayList<>();
+        roles.add("ROLE_ADMIN");
+        roles.add("ROLE_STANDARD");
+        roles.add("ROLE_BUSINESS");
+
+        Claims claims = Jwts.claims().setSubject(userDetails.getMemberId());
+        claims.put("auth", roles);
 
         MemberDTO memberDTO = memberService.searchMember(authResult.getName());
-
-        /* 토큰 생성*/
-        String token = Jwts.builder()
+        /* 토큰 생성 */
+        String token = Jwts.builder().setClaims(claims)
                 .setSubject(authResult.getName())
                 .setAudience(String.valueOf(memberDTO.getMemberCode()))
-                .setExpiration(new Date(System.currentTimeMillis()
-                        + Long.valueOf(environment.getProperty("token.expiration_time"))))
-                .signWith(SignatureAlgorithm.HS512, environment.getProperty("token.secretKey"))
-                .compact();
-
+                .claim("memberId", memberDTO.getMemberId())
+                                    .setExpiration(new Date(System.currentTimeMillis() +
+                                            Long.parseLong(environment.getProperty("token.expiration_time"))))
+                                            .signWith(SignatureAlgorithm.HS512, environment.getProperty("token.secret"))
+                                                    .compact();
         response.addHeader("token", token);
+        response.addHeader("memberId", userDetails.getMemberId());
     }
 }
